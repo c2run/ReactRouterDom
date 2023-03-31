@@ -1,4 +1,4 @@
-import {Contact} from "./Contact";
+import {Contact, dataFetcher} from "./Contact";
 import {Home} from "./Home";
 import {LoginPage} from "./LoginPage";
 import { BrowserRouter as Router, Route, Link, Outlet, Routes, createBrowserRouter, RouterProvider, createRoutesFromElements } from 'react-router-dom';
@@ -8,7 +8,7 @@ function App() {
     createRoutesFromElements(
     <Route path="/" element={<Root />} >
       <Route index element={<Home />} />
-      <Route path="/contact" element={<Contact />} />
+      <Route path="/contact" loader={dataFetcher} element={<Contact />} />
       <Route path="/loginpage" element={<LoginPage />} />
       </Route>
       )
