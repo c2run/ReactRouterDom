@@ -1,40 +1,37 @@
 import {Contact} from "./Contact";
 import {Home} from "./Home";
 import {LoginPage} from "./LoginPage";
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Outlet, Routes, createBrowserRouter, RouterProvider, createRoutesFromElements } from 'react-router-dom';
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+    <Route path="/" element={<Root />} >
+      <Route index element={<Home />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/loginpage" element={<LoginPage />} />
+      </Route>
+      )
+    );
   return (
-    <div className='App'>
-    <Router>
-    <Routes>
-    <Route exact path="/" element={<Home />}>
-    <Route exact path="/contact" element={<Contact />}></Route>
-    <Route exact path="/LoginPage" element={<LoginPage />}></Route>
-    </Route>
-    </Routes>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <Link to="/loginpage">LoginPage</Link>
-        </li>
-      </ul>
-    </div>
+  <div className="App">
+  <RouterProvider router={router} />
+  </div>);
+ }
 
-    </Router>
-
-    </div>
-  )
+const Root = () => {
+  return(
+    <>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/loginpage">LoginPage</Link>
+        <Outlet />
+      </div>
+    </>
+  );
 }
+
+
 export default App;
 
